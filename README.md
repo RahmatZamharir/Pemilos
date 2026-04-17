@@ -1,2 +1,0 @@
-# Pemilos
-Lergun
