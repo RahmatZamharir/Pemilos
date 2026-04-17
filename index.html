@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemilos SMAN 1 Sleman 2026</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts: Poppins + Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --orange: #ea580c;
+            --orange-light: #fb923c;
+            --orange-dark: #c2410c;
+            --orange-glow: rgba(234, 88, 12, 0.25);
+        }
+
+        * { font-family: 'Poppins', sans-serif; }
+        
+        /* === BACKGROUND PATTERN === */
+        body {
+            background-color: #fff7ed;
+            background-image: radial-gradient(circle at 20% 20%, rgba(234,88,12,0.07) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 80%, rgba(234,88,12,0.05) 0%, transparent 50%);
+            min-height: 100vh;
+        }
+
+        /* === ANIMATIONS === */
+        @keyframes bounceIn {
+            0%   { opacity: 0; transform: scale(0.5) translateY(40px); }
+            60%  { opacity: 1; transform: scale(1.05) translateY(-10px); }
+            80%  { transform: scale(0.97); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes fadeSlideUp {
+            0%   { opacity: 0; transform: translateY(24px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes progressFill {
+            0%   { width: 0%; }
+            100% { width: 100%; }
+        }
+        @keyframes pulse-ring {
+            0%   { box-shadow: 0 0 0 0 var(--orange-glow); }
+            70%  { box-shadow: 0 0 0 14px rgba(234,88,12,0); }
+            100% { box-shadow: 0 0 0 0 rgba(234,88,12,0); }
+        }
+        @keyframes ticker {
+            0%   { opacity:0; transform: translateY(-8px); }
+            100% { opacity:1; transform: translateY(0); }
+        }
+        @keyframes shimmer {
+            0%   { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-8px); }
+        }
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+        @keyframes checkmark {
+            0%   { stroke-dashoffset: 100; }
+            100% { stroke-dashoffset: 0; }
+        }
+
+        .anim-bounce-in  { animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .anim-fade-up    { animation: fadeSlideUp 0.5s ease forwards; }
+        .anim-float      { animation: float 3s ease-in-out infinite; }
+        .progress-bar-anim { animation: progressFill 3s ease-in-out forwards; }
+
+        /* === HEADER === */
+        .header-bar {
+            background: linear-gradient(135deg, #fff7ed 0%, #ffffff 100%);
+            border-bottom: 3px solid var(--orange);
+            box-shadow: 0 4px 20px rgba(234,88,12,0.1);
+        }
+        .logo-ring {
+            border: 3px solid var(--orange);
+            animation: pulse-ring 2.5s infinite;
+        }
+
+        /* === CLOCK === */
+        .clock-display {
+            background: linear-gradient(135deg, #1c0a00, #3d1200);
+            border: 2px solid var(--orange);
+            border-radius: 14px;
+            box-shadow: 0 0 20px var(--orange-glow), inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+        .clock-digits {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(180deg, #ff8c42, #ea580c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.1em;
+            text-shadow: none;
+            filter: drop-shadow(0 0 8px rgba(234,88,12,0.5));
+        }
+
+        /* === LOGIN CARD === */
+        .login-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(234,88,12,0.12), 0 8px 20px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+        .login-hero {
+            background: linear-gradient(135deg, var(--orange-dark) 0%, var(--orange) 50%, var(--orange-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .login-hero::before {
+            content: '';
+            position: absolute;
+            top: -40%; right: -20%;
+            width: 200px; height: 200px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+        }
+        .login-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%; left: -10%;
+            width: 150px; height: 150px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+        }
+        .input-field {
+            width: 100%;
+            padding: 14px 16px 14px 46px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            outline: none;
+            background: #fafafa;
+        }
+        .input-field:focus {
+            border-color: var(--orange);
+            background: white;
+            box-shadow: 0 0 0 4px var(--orange-glow);
+        }
+        .input-wrapper { position: relative; }
+        .input-icon {
+            position: absolute;
+            left: 15px; top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+        .input-wrapper:focus-within .input-icon { color: var(--orange); }
+        
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--orange-dark), var(--orange), var(--orange-light));
+            background-size: 200% auto;
+            color: white;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px var(--orange-glow);
+        }
+        .btn-login:hover {
+            background-position: right center;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(234,88,12,0.35);
+        }
+        .btn-login:active { transform: translateY(0); }
+
+        /* === VOTING PAGE === */
+        .voter-badge {
+            background: linear-gradient(135deg, #fff7ed, white);
+            border: 1px solid #fed7aa;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(234,88,12,0.08);
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #1a0500, #ea580c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* === CANDIDATE CARD === */
+        .candidate-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+        }
+        .candidate-card:hover {
+            border-color: var(--orange);
+            box-shadow: 0 20px 50px rgba(234,88,12,0.2);
+            transform: translateY(-8px) scale(1.01);
+        }
+        .candidate-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--orange-dark), var(--orange-light));
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 10;
+        }
+        .candidate-card:hover::before { opacity: 1; }
+        
+        .candidate-number {
+            position: absolute;
+            top: 12px; left: 12px;
+            width: 44px; height: 44px;
+            background: linear-gradient(135deg, var(--orange-dark), var(--orange));
+            color: white;
+            font-weight: 900;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(234,88,12,0.35);
+            z-index: 10;
+        }
+        .photo-placeholder {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #fff7ed, #fed7aa);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .photo-placeholder::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(234,88,12,0.05));
+        }
+        .hover-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(234,88,12,0.85), rgba(194,65,12,0.9));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+        .candidate-card:hover .hover-overlay { opacity: 1; }
+        
+        .btn-vote {
+            background: linear-gradient(135deg, #fff7ed, #ffedd5);
+            color: var(--orange);
+            border: 2px solid #fed7aa;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .candidate-card:hover .btn-vote {
+            background: linear-gradient(135deg, var(--orange), var(--orange-light));
+            color: white;
+            border-color: var(--orange);
+            box-shadow: 0 4px 15px var(--orange-glow);
+        }
+
+        /* === ADMIN TABLE === */
+        .admin-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+            overflow: hidden;
+        }
+        .admin-header-bar {
+            background: linear-gradient(135deg, var(--orange-dark), var(--orange));
+            padding: 24px 28px;
+            color: white;
+        }
+        .table-row:nth-child(even) { background: #fff7ed; }
+        .table-row:hover { background: #ffedd5; }
+
+        /* === MODAL === */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(28, 10, 0, 0.75);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            padding: 1rem;
+        }
+        .modal-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+        }
+        .success-icon-ring {
+            width: 90px; height: 90px;
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            animation: pulse-ring 2s infinite;
+        }
+        .vote-success-ring {
+            width: 90px; height: 90px;
+            background: linear-gradient(135deg, #fff7ed, #fed7aa);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        /* === STAT BADGES (Admin) === */
+        .stat-pill {
+            background: linear-gradient(135deg, #fff7ed, #ffedd5);
+            border: 1px solid #fed7aa;
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            color: #9a3412;
+            font-weight: 600;
+        }
+
+        /* === SCROLLBAR === */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #fff7ed; }
+        ::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--orange-dark); }
+
+        /* === RESPONSIVE TWEAKS === */
+        @media (max-width: 640px) {
+            .clock-digits { font-size: 1.4rem !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===================== HEADER ===================== -->
+    <header class="header-bar sticky top-0 z-40 py-3 px-4 md:px-6">
+        <div class="max-w-6xl mx-auto flex justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="logo-ring rounded-full p-0.5">
+                    <img src="logo-sman1.png" alt="Logo SMAN 1 Sleman" 
+                         class="w-11 h-11 md:w-14 md:h-14 object-contain rounded-full bg-white"
+                         onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='flex'">
+                    <div id="logo-fallback" class="hidden w-11 h-11 md:w-14 md:h-14 bg-orange-100 rounded-full items-center justify-center">
+                        <i class="fa-solid fa-school text-orange-600 text-xl"></i>
+                    </div>
+                </div>
+                <div>
+                    <h1 class="text-base md:text-xl font-bold text-gray-800 leading-tight">SMA Negeri 1 Sleman</h1>
+                    <p class="text-xs text-orange-600 font-semibold tracking-wider uppercase">Pemilihan OSIS 2026</p>
+                </div>
+            </div>
+
+            <div class="clock-display px-4 py-2 text-center min-w-[140px] md:min-w-[170px]">
+                <div id="clock-time" class="clock-digits text-2xl md:text-3xl font-bold">00:00:00</div>
+                <div id="clock-date" class="text-xs text-orange-300 mt-0.5 font-medium">Memuat...</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===================== MAIN ===================== -->
+    <main class="flex-grow flex items-start justify-center p-4 py-8 min-h-[calc(100vh-130px)]">
+
+        <!-- ======= VIEW 1: LOGIN ======= -->
+        <div id="view-login" class="login-card w-full max-w-md anim-fade-up">
+            
+            <!-- Hero Header -->
+            <div id="login-header" class="login-hero p-8 text-center relative z-10">
+                <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4 anim-float">
+                    <i class="fa-solid fa-vote-yea text-white text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-white mb-1">Selamat Datang</h2>
+                <p id="login-subtitle" class="text-orange-100 text-sm">Masuk untuk memberikan suara Anda</p>
+            </div>
+
+            <!-- Form Body -->
+            <div class="p-8">
+                <!-- Peringatan Waktu Tutup -->
+                <div id="time-warning" class="hidden mb-5 bg-red-50 border-l-4 border-red-500 p-4 rounded-xl text-sm text-red-700">
+                    <div class="flex items-center gap-2 mb-1">
+                        <i class="fa-solid fa-clock text-red-500"></i>
+                        <span class="font-bold">Sesi Pemilihan Ditutup</span>
+                    </div>
+                    <p>Pemilihan hanya dibuka pada pukul <strong>08:00 – 14:00 WIB</strong>.</p>
+                </div>
+
+                <!-- Error Message -->
+                <div id="login-error" class="hidden mb-4 bg-red-50 border border-red-200 text-red-700 p-4 rounded-xl flex items-start gap-3 text-sm">
+                    <i class="fa-solid fa-triangle-exclamation mt-0.5 flex-shrink-0 text-red-500"></i>
+                    <span id="login-error-text">Pesan error</span>
+                </div>
+
+                <form id="login-form">
+                    <!-- Username -->
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-semibold mb-2">
+                            <i class="fa-solid fa-id-card text-orange-500 mr-1"></i> Username / NIS
+                        </label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-user input-icon"></i>
+                            <input id="username" type="text" class="input-field" 
+                                   placeholder="Masukkan username / NIS" required autocomplete="off">
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-6">
+                        <label class="block text-gray-700 text-sm font-semibold mb-2">
+                            <i class="fa-solid fa-lock text-orange-500 mr-1"></i> Password
+                        </label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-key input-icon"></i>
+                            <input id="password" type="password" class="input-field" 
+                                   placeholder="Masukkan password" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-login">
+                        <i class="fa-solid fa-right-to-bracket mr-2"></i>
+                        MASUK & GUNAKAN HAK SUARA
+                    </button>
+                </form>
+
+                <p class="text-center text-xs text-gray-400 mt-5">
+                    <i class="fa-solid fa-shield-halved text-orange-400 mr-1"></i>
+                    Sistem aman · Suara bersifat rahasia · Satu orang satu suara
+                </p>
+            </div>
+        </div>
+
+        <!-- ======= VIEW 2: HALAMAN PEMILIHAN ======= -->
+        <div id="view-voting" class="hidden w-full max-w-6xl mx-auto anim-fade-up">
+            <!-- Voter Info Bar -->
+            <div class="voter-badge flex flex-col md:flex-row justify-between items-center p-5 mb-8 gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-700 rounded-2xl flex items-center justify-center shadow-lg">
+                        <i class="fa-solid fa-circle-user text-white text-2xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-400 font-medium uppercase tracking-wider">Pemilih Aktif</p>
+                        <h3 id="voter-name" class="text-lg font-bold text-gray-800">–</h3>
+                        <span id="voter-class" class="inline-block bg-orange-100 text-orange-700 text-xs font-bold px-3 py-0.5 rounded-full mt-0.5">Kelas</span>
+                    </div>
+                </div>
+                <button onclick="handleLogout()" 
+                        class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 font-semibold text-sm transition-all">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar
+                </button>
+            </div>
+
+            <!-- Page Title -->
+            <div class="text-center mb-10">
+                <h2 class="section-title text-3xl md:text-4xl font-black mb-3">Pilih Kandidat Ketua OSIS</h2>
+                <p class="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed">
+                    Gunakan hak suara Anda dengan bijak. Klik kartu kandidat atau tombol <strong>PILIH</strong> di bawahnya. 
+                    Setiap siswa hanya dapat memilih <strong>satu kali</strong>.
+                </p>
+                <div class="flex justify-center items-center gap-2 mt-4">
+                    <div class="w-2 h-2 rounded-full bg-orange-200"></div>
+                    <div class="w-8 h-1 rounded-full bg-orange-400"></div>
+                    <div class="w-2 h-2 rounded-full bg-orange-600"></div>
+                    <div class="w-8 h-1 rounded-full bg-orange-400"></div>
+                    <div class="w-2 h-2 rounded-full bg-orange-200"></div>
+                </div>
+            </div>
+
+            <!-- Kandidat Grid -->
+            <div id="candidates-container" class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"></div>
+        </div>
+
+        <!-- ======= VIEW 3: ADMIN DASHBOARD ======= -->
+        <div id="view-admin" class="hidden w-full max-w-6xl mx-auto anim-fade-up">
+            <div class="admin-card">
+                <!-- Admin Header -->
+                <div class="admin-header-bar">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white bg-opacity-20 rounded-xl flex items-center justify-center">
+                                <i class="fa-solid fa-chart-bar text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-xl font-bold text-white">Dashboard Admin Pemilos</h2>
+                                <p class="text-orange-200 text-sm">Rekapitulasi suara secara real-time</p>
+                            </div>
+                        </div>
+                        <button onclick="handleLogout()" 
+                                class="flex items-center gap-2 px-5 py-2.5 bg-white bg-opacity-15 hover:bg-opacity-25 text-white rounded-xl font-semibold text-sm transition-all border border-white border-opacity-30">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Bar -->
+                <div class="p-6 border-b border-orange-100 flex flex-wrap gap-3 items-center">
+                    <div class="stat-pill">
+                        <i class="fa-solid fa-users mr-2 text-orange-500"></i>
+                        Total Suara: <span id="total-votes" class="font-black text-orange-600 ml-1">0</span>
+                    </div>
+                    <div class="stat-pill">
+                        <i class="fa-solid fa-database mr-2 text-orange-500"></i>
+                        Data tersimpan di <span class="font-bold ml-1">localStorage</span>
+                    </div>
+                    <div class="flex-grow"></div>
+                    <button onclick="exportCSV()" 
+                            class="flex items-center gap-2 px-4 py-2 bg-green-50 hover:bg-green-100 text-green-700 rounded-xl font-semibold text-sm transition-all border border-green-200">
+                        <i class="fa-solid fa-file-csv"></i> Export CSV
+                    </button>
+                    <button onclick="resetData()" 
+                            class="flex items-center gap-2 px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl font-semibold text-sm transition-all border border-red-200">
+                        <i class="fa-solid fa-trash-can"></i> Reset Data
+                    </button>
+                </div>
+
+                <!-- Rekap Per Kandidat -->
+                <div id="candidate-stats" class="p-6 grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-orange-50"></div>
+
+                <!-- Tabel Data -->
+                <div class="p-6">
+                    <h3 class="font-bold text-gray-700 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-list-ul text-orange-500"></i>
+                        Log Pemilihan Detail
+                    </h3>
+                    <div class="overflow-x-auto rounded-xl border border-orange-100">
+                        <table class="w-full text-left text-sm border-collapse">
+                            <thead>
+                                <tr class="bg-gradient-to-r from-orange-600 to-orange-500 text-white">
+                                    <th class="p-4 font-semibold">#</th>
+                                    <th class="p-4 font-semibold"><i class="fa-solid fa-clock mr-1"></i>Waktu</th>
+                                    <th class="p-4 font-semibold"><i class="fa-solid fa-user mr-1"></i>Nama Pemilih</th>
+                                    <th class="p-4 font-semibold"><i class="fa-solid fa-chalkboard mr-1"></i>Kelas</th>
+                                    <th class="p-4 font-semibold"><i class="fa-solid fa-check-to-slot mr-1"></i>Kandidat</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-table-body">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ===================== MODAL 1: LOGIN SUKSES ===================== -->
+    <div id="modal-login" class="hidden modal-overlay">
+        <div class="modal-card anim-bounce-in">
+            <div class="success-icon-ring">
+                <i class="fa-solid fa-circle-check text-green-500 text-4xl"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Login Berhasil!</h2>
+            <div class="bg-orange-50 border border-orange-200 rounded-2xl p-4 mt-3 mb-5">
+                <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Selamat Datang,</p>
+                <p id="modal-voter-name" class="text-lg font-bold text-orange-700">–</p>
+                <p id="modal-voter-class" class="text-sm font-semibold text-gray-500">–</p>
+            </div>
+            <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden">
+                <div id="login-progress-bar" class="h-full bg-gradient-to-r from-orange-500 to-orange-300 rounded-full"></div>
+            </div>
+            <p class="text-xs text-gray-400 mt-3 animate-pulse">
+                <i class="fa-solid fa-spinner fa-spin mr-1"></i>
+                Mempersiapkan surat suara...
+            </p>
+        </div>
+    </div>
+
+    <!-- ===================== MODAL 2: PILIH SUKSES ===================== -->
+    <div id="modal-vote" class="hidden modal-overlay">
+        <div class="modal-card anim-bounce-in">
+            <div class="vote-success-ring anim-float">
+                <i class="fa-solid fa-circle-check text-orange-500 text-4xl"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Suara Berhasil Dicatat!</h2>
+            <p class="text-gray-500 text-sm mb-5 leading-relaxed">
+                Terima kasih atas partisipasi Anda dalam <strong>Pemilos SMAN 1 Sleman 2026</strong>. 
+                Suara Anda sangat berarti.
+            </p>
+            <div class="bg-orange-50 rounded-xl p-3 mb-5 text-sm">
+                <p class="text-orange-600 font-medium">
+                    <i class="fa-solid fa-info-circle mr-1"></i>
+                    Anda memilih: <strong id="modal-chosen-candidate">–</strong>
+                </p>
+            </div>
+            <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden mb-2">
+                <div id="progress-bar" class="h-full bg-gradient-to-r from-orange-600 to-orange-400 rounded-full"></div>
+            </div>
+            <p class="text-xs text-gray-400">Kembali ke halaman awal otomatis...</p>
+        </div>
+    </div>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="py-5 text-center text-gray-400 text-xs bg-white border-t border-orange-100 mt-auto">
+        <p>
+            <i class="fa-solid fa-shield-halved text-orange-400 mr-1"></i>
+            &copy; 2026 Panitia Pemilos SMA Negeri 1 Sleman &middot; Informatika Kelas XI · Kurikulum Merdeka
+        </p>
+    </footer>
+
+    <!-- ===================== JAVASCRIPT ===================== -->
+    <script>
+        // =======================================================
+        // DATA MOCK USERS (Array of Objects)
+        // Konsep: Array of Objects adalah kumpulan objek dalam array.
+        // Setiap objek mewakili satu pengguna dengan properti-propertinya.
+        // =======================================================
+        const MOCK_USERS = [
+            {username: "13851", password: "12345", name: "ADINDA DZAKIA WIBOWO", kelas: "10-A"},
+{username: "13852", password: "12345", name: "AGUSTINA MEYLANI PUTRI", kelas: "10-A"},
+{username: "13853", password: "12345", name: "AIRA INDAH PUSPITA EFFENDY", kelas: "10-A"},
+{username: "13854", password: "12345", name: "ALIFA MUFIDA", kelas: "10-A"},
+{username: "13855", password: "12345", name: "ALVINO HEIDY HANIAN", kelas: "10-A"},
+{username: "13856", password: "12345", name: "ANGGITA AMRANANI", kelas: "10-A"},
+{username: "13857", password: "12345", name: "ANTONIUS DWI BAGUS WICAKSANA", kelas: "10-A"},
+{username: "13858", password: "12345", name: "AUDREYY ANDHAREVA MAVIE", kelas: "10-A"},
+{username: "13860", password: "12345", name: "AURELLIA LUSIANA NURJANNAH", kelas: "10-A"},
+{username: "13861", password: "12345", name: "AYDINA FATHI KHALISA", kelas: "10-A"},
+{username: "13862", password: "12345", name: "BRIGITTA RACLEIFFINA IRWANTO", kelas: "10-A"},
+{username: "13863", password: "12345", name: "CLARA ELANY BUDYASTAMI", kelas: "10-A"},
+{username: "13864", password: "12345", name: "DANIEL VIDION REANDA", kelas: "10-A"},
+{username: "13865", password: "12345", name: "DEVIONA AYUTIRTA PRABOWO", kelas: "10-A"},
+{username: "13866", password: "12345", name: "FARIDA KURNIAWATI", kelas: "10-A"},
+{username: "13867", password: "12345", name: "FRANSISCO BENEDICTO RADITYA GADAFILIA A", kelas: "10-A"},
+{username: "13868", password: "12345", name: "GERARDA DEA RUSPASARI", kelas: "10-A"},
+{username: "13869", password: "12345", name: "HANIF NUR RAHMAWATI", kelas: "10-A"},
+{username: "13870", password: "12345", name: "HUMAIRA DIANDRA AYU PRASETYO", kelas: "10-A"},
+{username: "13871", password: "12345", name: "JUAN DELANO WIDYADANA", kelas: "10-A"},
+{username: "13872", password: "12345", name: "KHAIRANI AL PALIMBANI", kelas: "10-A"},
+{username: "13873", password: "12345", name: "MARIA ALICIA KANAYA PUTRI", kelas: "10-A"},
+{username: "13874", password: "12345", name: "MEYSEILA SIFAUNNAFISA", kelas: "10-A"},
+{username: "13875", password: "12345", name: "MUHAMMAD AHNAF FATHAN MUBINA", kelas: "10-A"},
+{username: "13876", password: "12345", name: "NADILA PUTRI ARIYANI", kelas: "10-A"},
+{username: "13877", password: "12345", name: "NADINDRA KIRANA PUTRI", kelas: "10-A"},
+{username: "13878", password: "12345", name: "NAYLA SEKAR LARASATI", kelas: "10-A"},
+{username: "13879", password: "12345", name: "RAAHEEL KHALIZA PUTRI", kelas: "10-A"},
+{username: "13880", password: "12345", name: "RADHII PAMBUDI", kelas: "10-A"},
+{username: "13881", password: "12345", name: "SALWA LAISYA RAIHAANUN", kelas: "10-A"},
+{username: "13882", password: "12345", name: "SHAFIRA DWI RIANI", kelas: "10-A"},
+{username: "13883", password: "12345", name: "THEOPHILA ANGGUN MITAYANI", kelas: "10-A"},
+{username: "13884", password: "12345", name: "VIKA SYAIRA HERAWATI", kelas: "10-A"},
+{username: "13885", password: "12345", name: "YULIANUS DHANI KURNIAWAN", kelas: "10-A"},
+{username: "13886", password: "12345", name: "YUSUF FAJAR PRATAMA", kelas: "10-A"},
+{username: "13887", password: "12345", name: "ZIDAN WIDYANT PRASETYO", kelas: "10-A"},
+{username: "13888", password: "12345", name: "ADHWA 'AQILLAH NOERHARDIYANI", kelas: "10-B"},
+{username: "13889", password: "12345", name: "ADVENTIA OLINE YESLIN CADISA", kelas: "10-B"},
+{username: "13890", password: "12345", name: "AISYAH DINI ALMASEVI", kelas: "10-B"},
+{username: "13891", password: "12345", name: "AMALIA DWI NURAINI", kelas: "10-B"},
+{username: "13892", password: "12345", name: "ANDINKA ARLITA PUTRI", kelas: "10-B"},
+{username: "13893", password: "12345", name: "ANGGITA ZOYA NURSYAFA", kelas: "10-B"},
+{username: "13894", password: "12345", name: "AQILA SALWA NUR AINI SYIFA", kelas: "10-B"},
+{username: "13895", password: "12345", name: "ARINDA INTAN CAHYA PUTRI", kelas: "10-B"},
+{username: "13896", password: "12345", name: "ASYIFA KHAIRUNISA SUKMAWAN", kelas: "10-B"},
+{username: "13897", password: "12345", name: "AZZAM KAMIL BAIHAQI", kelas: "10-B"},
+{username: "13898", password: "12345", name: "AZZAM MUBAROQ", kelas: "10-B"},
+{username: "13899", password: "12345", name: "BUNGA INDAH CAHYANINGRUM", kelas: "10-B"},
+{username: "13744", password: "12345", name: "AHMAD MUZAKKY RISMAWAN AL FATTAHILLAH", kelas: "11-B"},
+{username: "13745", password: "12345", name: "AHMAD SHOFWAN ABDILLAH", kelas: "11-B"},
+{username: "13823", password: "12345", name: "ANNISA DWI YULIANI", kelas: "11-B"},
+{username: "13780", password: "12345", name: "ARIQ MAULANA ZAKI", kelas: "11-B"},
+{username: "13605", password: "12345", name: "AURELIA AZHAR LARASATI", kelas: "11-B"},
+{username: "13785", password: "12345", name: "BRILIAN LATIF WIBOWO", kelas: "11-B"},
+{username: "13753", password: "12345", name: "DAYINTA LAILY WIJAYANI", kelas: "11-B"},
+{username: "13755", password: "12345", name: "DELLANOVA RAHADATUL 'AISYI", kelas: "11-B"},
+{username: "13607", password: "12345", name: "DIAJENG YUVANE DUARDHANI", kelas: "11-B"},
+{username: "13757", password: "12345", name: "DWIKI ZAKY APRILIANTO", kelas: "11-B"},
+{username: "13720", password: "12345", name: "ERISA MEILANI KHOIRIYAH", kelas: "11-B"},
+{username: "13791", password: "12345", name: "EWALDO MINZEKE", kelas: "11-B"},
+{username: "13722", password: "12345", name: "FAHRILA FAZAKIR DETRIANA PUTI", kelas: "11-B"},
+{username: "13609", password: "12345", name: "FAKHRUNISA NURYAN ISNA", kelas: "11-B"},
+{username: "13723", password: "12345", name: "FATHONI CANDRA KUSUMA", kelas: "11-B"},
+{username: "13792", password: "12345", name: "FATIKA KHOIRU NISA", kelas: "11-B"},
+{username: "13760", password: "12345", name: "FRIDA NUR ZAZKIA RADISTY", kelas: "11-B"},
+{username: "13650", password: "12345", name: "GATHAM AZIZ TAQWIM", kelas: "11-B"},
+{username: "13834", password: "12345", name: "GILANG AL FAROZI", kelas: "11-B"},
+{username: "13686", password: "12345", name: "IFANDA FITRA TAMA", kelas: "11-B"},
+{username: "13652", password: "12345", name: "KENNY RAFAY MAHBEER", kelas: "11-B"},
+{username: "13729", password: "12345", name: "KEVIN ADRIAN RAJENDRAKHA", kelas: "11-B"},
+{username: "13800", password: "12345", name: "LATIFA NUR LISKA PUTRI", kelas: "11-B"},
+{username: "13842", password: "12345", name: "MANGGOLO YUDO PUTRO LEGOWO", kelas: "11-B"},
+{username: "13766", password: "12345", name: "MUHAMMAD ALIFIANTO AMANULLAH", kelas: "11-B"},
+{username: "13843", password: "12345", name: "MUHAMMAD IBNU NADHIF MUFLIH", kelas: "11-B"},
+{username: "13768", password: "12345", name: "NADIA AULIA SHAFA", kelas: "11-B"},
+{username: "13661", password: "12345", name: "NASYA AULIA HAFIDAH", kelas: "11-B"},
+{username: "13770", password: "12345", name: "NURUL AZKIYA MOZZA", kelas: "11-B"},
+{username: "13698", password: "12345", name: "OKTAVIA NUR UTARI", kelas: "11-B"},
+{username: "13771", password: "12345", name: "PANDU RASENDRYA ADHIYASTA AFGANI", kelas: "11-B"},
+{username: "13776", password: "12345", name: "SHEVA ANDRIANO DHASILVA", kelas: "11-B"},
+{username: "13705", password: "12345", name: "SHOFIA IRMA NUR AZIZAH", kelas: "11-B"},
+{username: "13849", password: "12345", name: "VIENCYA FEMALESAN PUTRINALYA", kelas: "11-B"},
+{username: "13706", password: "12345", name: "WIDYA SAPUTRI", kelas: "11-B"},
+{username: "13742", password: "12345", name: "WIDYANA DAMARWATI", kelas: "11-B"},
+{username: "13671", password: "12345", name: "ADITIYA KUSUMA PUTRA LISTIYO", kelas: "11-C"},
+{username: "13599", password: "12345", name: "AGITYA FAIRUZ DZAKIYYA", kelas: "11-C"},
+{username: "13639", password: "12345", name: "APRILIA LINTANG KARIENA", kelas: "11-C"},
+{username: "13824", password: "12345", name: "ARIFAH PUTRI PRIANDANI", kelas: "11-C"},
+{username: "13825", password: "12345", name: "ATHAYA YUMNA SAYIDA", kelas: "11-C"},
+{username: "13752", password: "12345", name: "CHAISYA CHANDRA KIRANA HERMAWAN", kelas: "11-C"},
+{username: "13644", password: "12345", name: "CHRISYA AYU PURNOMO", kelas: "11-C"},
+{username: "13828", password: "12345", name: "DAANISH SYNNOVE ABDULLAH", kelas: "11-C"},
+{username: "13717", password: "12345", name: "DAFFA MICHO SAPUTRA", kelas: "11-C"},
+{username: "13788", password: "12345", name: "DN KENZIE JAVAS WISTARA", kelas: "11-C"},
+{username: "13679", password: "12345", name: "FADHIL RAYHAN RADMANA", kelas: "11-C"},
+{username: "13795", password: "12345", name: "FELYA AYUDHYA ANGGRAINI", kelas: "11-C"},
+{username: "13725", password: "12345", name: "FEMBAYUN CAHYANINGTYAS", kelas: "11-C"},
+{username: "13759", password: "12345", name: "FIRDIANA MILANI ASYIFA", kelas: "11-C"},
+{username: "13684", password: "12345", name: "GABRIELLA OKTOVIDIA ESTININGRUM", kelas: "11-C"},
+{username: "13688", password: "12345", name: "INDRA RAMADITYA AMA", kelas: "11-C"},
+{username: "13798", password: "12345", name: "KHOLIFATUN FADHILLAH RACHMADANI", kelas: "11-C"},
+{username: "13839", password: "12345", name: "KHUMAIRA NASHIFA", kelas: "11-C"},
+{username: "13764", password: "12345", name: "LAILA AZZA DELILA", kelas: "11-C"},
+{username: "13765", password: "12345", name: "MEISYAFILLA ARUM WULANDARI", kelas: "11-C"},
+{username: "13656", password: "12345", name: "MEZALUNA CANDANA SAKHI FADANTYA", kelas: "11-C"},
+{username: "13619", password: "12345", name: "MUHAMMAD RIZKY SAPUTRA", kelas: "11-C"},
+{username: "13844", password: "12345", name: "NAAZNEEN NAFISAH RAHMAN", kelas: "11-C"},
+{username: "13734", password: "12345", name: "NABILA KHOIRUNNISA'", kelas: "11-C"},
+{username: "13620", password: "12345", name: "NAFLA LAILA ARIEQA NABIHHANA", kelas: "11-C"},
+{username: "13735", password: "12345", name: "NIXON RAFIF PRAYOGA", kelas: "11-C"},
+{username: "13806", password: "12345", name: "NURLITA PUSPITA SARI", kelas: "11-C"},
+{username: "13736", password: "12345", name: "RAHMA AZAKHRA", kelas: "11-C"},
+{username: "13626", password: "12345", name: "RIDHO AMINULLOH", kelas: "11-C"},
+{username: "13701", password: "12345", name: "RIVANA BUNGA ASMARANI", kelas: "11-C"},
+{username: "13739", password: "12345", name: "SALWA AMALA PUTRI", kelas: "11-C"},
+{username: "13775", password: "12345", name: "SHAFA' AGHANIA GHASSANI FATHIN", kelas: "11-C"},
+{username: "13740", password: "12345", name: "SHAKILA MEHERUNISSA RAINA WIDODO", kelas: "11-C"},
+{username: "13812", password: "12345", name: "SHIRIN NASWA MADANI", kelas: "11-C"},
+{username: "13630", password: "12345", name: "SYIFA ALIFATUL MAULIDA", kelas: "11-C"},
+{username: "13850", password: "12345", name: "ZAHRA ARIF NUR ASYIFAH", kelas: "11-C"},
+{username: "13635", password: "12345", name: "ACHMAD FARREL PRADITYA", kelas: "11-D"},
+{username: "13817", password: "12345", name: "ADNAN YULIYANTO", kelas: "11-D"},
+{username: "13746", password: "12345", name: "ALFITO DIMAS WIBOWO", kelas: "11-D"},
+{username: "13779", password: "12345", name: "AL-GHAZY FAISA AHNAF", kelas: "11-D"},
+{username: "13638", password: "12345", name: "ANISSA FARAHDILLAH", kelas: "11-D"},
+{username: "13750", password: "12345", name: "ARRAFAD SARIF HIDAYAH", kelas: "11-D"},
+{username: "13640", password: "12345", name: "AULIA RAHMAWATI", kelas: "11-D"},
+{username: "13784", password: "12345", name: "AZMI HANA KHAIRUNNISA", kelas: "11-D"},
+{username: "13641", password: "12345", name: "AZZAHRA KHOIRUNNISA RAMADHANI", kelas: "11-D"},
+{username: "13754", password: "12345", name: "DEFANY FAUZIAH RACHMAWATI", kelas: "11-D"},
+{username: "13786", password: "12345", name: "DIMAS CAHYO WIJOYO", kelas: "11-D"},
+{username: "13756", password: "12345", name: "DIRACALISTA KUSSAFITRI", kelas: "11-D"},
+{username: "13608", password: "12345", name: "DZAKIA HASNA FAUZIAH", kelas: "11-D"},
+{username: "13645", password: "12345", name: "DZAKY ASKAR AL ARQOM", kelas: "11-D"},
+{username: "13790", password: "12345", name: "ERLINA YULIANINGSIH", kelas: "11-D"},
+{username: "13832", password: "12345", name: "FATAN ANSHORY", kelas: "11-D"},
+{username: "13682", password: "12345", name: "FAWZAN APRIANSYAH", kelas: "11-D"},
+{username: "13651", password: "12345", name: "IQBAL AGRA KEANDRA", kelas: "11-D"},
+{username: "13613", password: "12345", name: "ISNA NURUL AZIZAH", kelas: "11-D"},
+{username: "13615", password: "12345", name: "JONATHAN DEWA AGRISTANT PRABENDRA", kelas: "11-D"},
+{username: "13797", password: "12345", name: "KEISA DEVITA RAHMANJANI", kelas: "11-D"},
+{username: "13654", password: "12345", name: "MANUBENY YUSUF MULYA", kelas: "11-D"},
+{username: "13617", password: "12345", name: "MAYRINDA LAKSANA PUTRI", kelas: "11-D"},
+{username: "13801", password: "12345", name: "MESSIA AZALIA ZHAFIF", kelas: "11-D"},
+{username: "13767", password: "12345", name: "MUTIARA NALURI DEWI", kelas: "11-D"},
+{username: "13659", password: "12345", name: "NABILA MUKHBITA PUTRI", kelas: "11-D"},
+{username: "13622", password: "12345", name: "NELA WATI NAZWA", kelas: "11-D"},
+{username: "13846", password: "12345", name: "QIRANEVA ZAMNA GHEA NAREZTA", kelas: "11-D"},
+{username: "13808", password: "12345", name: "RAHMAT ZAMHARIR QUROTU'AIN", kelas: "11-D"},
+{username: "13624", password: "12345", name: "RAISSA SAFANA", kelas: "11-D"},
+{username: "13625", password: "12345", name: "RANIA JASMINE RESPATRIA", kelas: "11-D"},
+{username: "13664", password: "12345", name: "RENATHA AULIA PUTRI", kelas: "11-D"},
+{username: "13702", password: "12345", name: "RIZKY NUGRAHA", kelas: "11-D"},
+{username: "13809", password: "12345", name: "RIZQI GINELAR UNGGUL DAROJAD", kelas: "11-D"},
+{username: "13814", password: "12345", name: "TYAGA MAHARKA YUSUF", kelas: "11-D"},
+{username: "13669", password: "12345", name: "YEMIMA MAWAR SEPHA", kelas: "11-D"},
+{username: "13711", password: "12345", name: "ANGGER SETYO WICAKSONO", kelas: "11-E"},
+{username: "13747", password: "12345", name: "ANGGITA KURNIANDARI", kelas: "11-E"},
+{username: "13822", password: "12345", name: "ANINDYA EARLY SYANDANA", kelas: "11-E"},
+{username: "13672", password: "12345", name: "ANNIDA EDELWEISE NAKEYSHA ARIFIA", kelas: "11-E"},
+{username: "13714", password: "12345", name: "ARETA FEBRIA HUWAIDA", kelas: "11-E"},
+{username: "13604", password: "12345", name: "ARVIKA RIEFMA NURMALITA", kelas: "11-E"},
+{username: "13782", password: "12345", name: "AUFA NUR FADILA", kelas: "11-E"},
+{username: "13751", password: "12345", name: "AVISA AZALIA RAHMANINGRUM", kelas: "11-E"},
+{username: "13675", password: "12345", name: "AYU DEWI LESTARI", kelas: "11-E"},
+{username: "13783", password: "12345", name: "AZIFAH MUFASIHIN FATIYAH", kelas: "11-E"},
+{username: "13715", password: "12345", name: "AZZAHRA NUR HABIBILLAH", kelas: "11-E"},
+{username: "13676", password: "12345", name: "CICIT AYU TASYA", kelas: "11-E"},
+{username: "13677", password: "12345", name: "DYAH RATRI ARIYANI", kelas: "11-E"},
+{username: "13789", password: "12345", name: "ELMEIRA ANAS", kelas: "11-E"},
+{username: "13680", password: "12345", name: "FAIRUZ DINIAN ZAKI", kelas: "11-E"},
+{username: "13681", password: "12345", name: "FALISHA YASMIN", kelas: "11-E"},
+{username: "13793", password: "12345", name: "FAUNISA LATIF", kelas: "11-E"},
+{username: "13683", password: "12345", name: "FRANSISKA MAGAMITA", kelas: "11-E"},
+{username: "13726", password: "12345", name: "FUNAEKA AHZA RAHMATU", kelas: "11-E"},
+{username: "13611", password: "12345", name: "GITA ALENA ZHARIIF", kelas: "11-E"},
+{username: "13612", password: "12345", name: "INNESA NATHANIA KUSMANTO", kelas: "11-E"},
+{username: "13690", password: "12345", name: "KEISYA HYACINTHA RAMADANI SALSABILA", kelas: "11-E"},
+{username: "13691", password: "12345", name: "LINTANG AJI PANGESTU", kelas: "11-E"},
+{username: "13693", password: "12345", name: "MANDEGANI LAUDZA'I", kelas: "11-E"},
+{username: "13845", password: "12345", name: "NAJWA AZIZIAH SALIHI", kelas: "11-E"},
+{username: "13621", password: "12345", name: "NAUFAL DZAKY DZUL HANNAN", kelas: "11-E"},
+{username: "13697", password: "12345", name: "NAURA ERLYNA PUTRI", kelas: "11-E"},
+{username: "13805", password: "12345", name: "NAYLA SAFIRA PUTRI", kelas: "11-E"},
+{username: "13699", password: "12345", name: "PUTRI AUDREY KHOIRUNNISA", kelas: "11-E"},
+{username: "13700", password: "12345", name: "QALESYA AIDA SURYOTOMO", kelas: "11-E"},
+{username: "13703", password: "12345", name: "SABRINA AURA CINTA AZZAHRA", kelas: "11-E"},
+{username: "13847", password: "12345", name: "SATRIA GARDHA MEMAYU", kelas: "11-E"},
+{username: "13704", password: "12345", name: "SEPTIANA PUTRI RAHMADANNI", kelas: "11-E"},
+{username: "13811", password: "12345", name: "SHAFIRA ARDIANA PUTRI", kelas: "11-E"},
+{username: "13777", password: "12345", name: "SHEZA VANYA NAZILA ERTANTO", kelas: "11-E"},
+{username: "13631", password: "12345", name: "SYIFA AZZAHRA", kelas: "11-E"},
+{username: "13708", password: "12345", name: "ABRAR RACHMAT DIANSYAH", kelas: "11-F"},
+{username: "13815", password: "12345", name: "ADELIA DWI YUNIKA", kelas: "11-F"},
+{username: "13743", password: "12345", name: "AFIFAH DEWI NAYLA PUTRI", kelas: "11-F"},
+{username: "13600", password: "12345", name: "AKBAR WICAKSONO MUBAKRI", kelas: "11-F"},
+{username: "13819", password: "12345", name: "ALANTAMA AFIF ANTARA", kelas: "11-F"},
+{username: "13821", password: "12345", name: "ALMEIRA AHZA NARESWARI", kelas: "11-F"},
+{username: "13749", password: "12345", name: "ARLIOKTA WASIATUL CHOLIFAH", kelas: "11-F"},
+{username: "13603", password: "12345", name: "ARTHA ZHEZA FEBRIARISTI", kelas: "11-F"},
+{username: "13643", password: "12345", name: "BONIFASIUS NOEL ADVENTO", kelas: "11-F"},
+{username: "13718", password: "12345", name: "DEVINA APVRIZA SUDARSONO", kelas: "11-F"},
+{username: "13758", password: "12345", name: "EFTI ISNAWATI", kelas: "11-F"},
+{username: "13646", password: "12345", name: "ELITA NUR", kelas: "11-F"},
+{username: "13678", password: "12345", name: "ERVINA RIZQY RAHMAWATI", kelas: "11-F"},
+{username: "13831", password: "12345", name: "FARRAS SYIHABUDDIN AL HANNAN", kelas: "11-F"},
+{username: "13761", password: "12345", name: "GHULAM MA'RUF HIDAYAT", kelas: "11-F"},
+{username: "13685", password: "12345", name: "GURUH IDAM GILANG PRADANA", kelas: "11-F"},
+{username: "13835", password: "12345", name: "HAIDIR BINTANG AL FARREL", kelas: "11-F"},
+{username: "13614", password: "12345", name: "JOHAN CIHANA", kelas: "11-F"},
+{username: "13653", password: "12345", name: "KEYSHA RIZKY RAMADHANI", kelas: "11-F"},
+{username: "13762", password: "12345", name: "KHANZA REIHA AQILA ZAHRA", kelas: "11-F"},
+{username: "13841", password: "12345", name: "LUFTHANZA JUSANDO", kelas: "11-F"},
+{username: "13731", password: "12345", name: "MARSHANISWA ABIDAH PRATOMO", kelas: "11-F"},
+{username: "13802", password: "12345", name: "MUHAMAD RIYAN DWI ARIWIBOWO", kelas: "11-F"},
+{username: "13618", password: "12345", name: "MUHAMMAD DZAKI RIFQIANSYAH", kelas: "11-F"},
+{username: "13733", password: "12345", name: "MUHAMMAD ROFIQ", kelas: "11-F"},
+{username: "13695", password: "12345", name: "NAHLA DIAN RENATASARI", kelas: "11-F"},
+{username: "13696", password: "12345", name: "NAOMI NATANIA SETIAWAN", kelas: "11-F"},
+{username: "13773", password: "12345", name: "RADIT NURLATIF ADITYA", kelas: "11-F"},
+{username: "13663", password: "12345", name: "RAISSA ADINDA ELMIRA", kelas: "11-F"},
+{username: "13737", password: "12345", name: "RIDHO BIAS RAMADHAN", kelas: "11-F"},
+{username: "13627", password: "12345", name: "RIFKY DAMARA WIJAYA", kelas: "11-F"},
+{username: "13738", password: "12345", name: "RIFQY SYARIF HUSAIN", kelas: "11-F"},
+{username: "13628", password: "12345", name: "RULIFF WAHYU RAMADHAN", kelas: "11-F"},
+{username: "13629", password: "12345", name: "SHABINA FITRIANA PUTRI EFENDI", kelas: "11-F"},
+{username: "13667", password: "12345", name: "TAUFIK HALIM HENDRIANSYAH", kelas: "11-F"},
+{username: "13670", password: "12345", name: "ZALFA YUDIANNAFISHA RAYYA", kelas: "11-F"},
+{username: "13818", password: "12345", name: "AFINDA ASFA WIDYAWATI", kelas: "11-G"},
+{username: "13820", password: "12345", name: "ALISA KUSUMA WARDANI", kelas: "11-G"},
+{username: "13710", password: "12345", name: "ALTHAFIANA KHUMAYRA ZAHRA", kelas: "11-G"},
+{username: "13637", password: "12345", name: "ANANTHA ATINDRIYA SOESANTO", kelas: "11-G"},
+{username: "13601", password: "12345", name: "ANGELINE DHEANYTA SETIAWAN", kelas: "11-G"},
+{username: "13748", password: "12345", name: "ANNISA DWI SETYANINGSIH", kelas: "11-G"},
+{username: "13781", password: "12345", name: "ATHALLA ZARA WINAR SAPUTRI", kelas: "11-G"},
+{username: "13674", password: "12345", name: "AULIA AZZAHROH NUR SALSABIILA", kelas: "11-G"},
+{username: "13826", password: "12345", name: "AULIA DEVINTA SALSABILA", kelas: "11-G"},
+{username: "13827", password: "12345", name: "BARCKAFII ZIMMERA KIRANA", kelas: "11-G"},
+{username: "13642", password: "12345", name: "BISMA WISNU KAWIRYAN", kelas: "11-G"},
+{username: "13453", password: "12345", name: "ADITYA RAGIL YULIANTO", kelas: "12-G"},
+{username: "13524", password: "12345", name: "AFIFAH NUR SYAHRANI", kelas: "12-G"},
+{username: "13562", password: "12345", name: "ALFI MAHSUNAH", kelas: "12-G"},
+{username: "13346", password: "12345", name: "ANGGITA FITRIANA RAHMAWATI", kelas: "12-G"},
+{username: "13597", password: "12345", name: "ARINI TRI SALSABILA LESTARI", kelas: "12-G"},
+{username: "13419", password: "12345", name: "ATTALLAH NURRISTA NUGRAHA", kelas: "12-G"},
+{username: "13569", password: "12345", name: "BISMA NAUFA AMRU", kelas: "12-G"},
+{username: "13570", password: "12345", name: "CHARENT BILQIES ANDINI HAPSARI", kelas: "12-G"},
+{username: "13489", password: "12345", name: "DANIAL NOURI MUSYAFFA", kelas: "12-G"},
+{username: "13351", password: "12345", name: "DESTA AULIA RAHMAWATI", kelas: "12-G"},
+{username: "13352", password: "12345", name: "DESTIANA AISYAH AZZAHRA", kelas: "12-G"},
+{username: "13392", password: "12345", name: "DYAN APRILLIANINGSIH", kelas: "12-G"},
+{username: "13574", password: "12345", name: "ENDA TRI ARWAN MAULANA", kelas: "12-G"},
+{username: "13539", password: "12345", name: "GLEDIS TUSELIA", kelas: "12-G"},
+{username: "13404", password: "12345", name: "LEANDRA KURNIAWAN", kelas: "12-G"},
+{username: "13503", password: "12345", name: "LARETA SABRINA NATHANIA", kelas: "12-G"},
+{username: "13405", password: "12345", name: "LINTANG CAHYANINGRUM", kelas: "12-G"},
+{username: "13363", password: "12345", name: "LULU AFIFAH", kelas: "12-G"},
+{username: "13544", password: "12345", name: "KHOIRIN NISSA IDA KHASANAH", kelas: "12-E"},
+{username: "13406", password: "12345", name: "M. IRSYAD FAQIH", kelas: "12-E"},
+{username: "13407", password: "12345", name: "MARIA KARTIKA DIAN UTAMI", kelas: "12-E"},
+{username: "13364", password: "12345", name: "MIKHAILA VEDA SARASWATI", kelas: "12-E"},
+{username: "13367", password: "12345", name: "MUHAMMAD RAFFI ARZANY", kelas: "12-E"},
+{username: "13584", password: "12345", name: "NABILA SALSABILA", kelas: "12-E"},
+{username: "13508", password: "12345", name: "NADIA ANDRIYANI", kelas: "12-E"},
+{username: "13475", password: "12345", name: "NAMIRA TSABITA NISRINA", kelas: "12-E"},
+{username: "13408", password: "12345", name: "NISRINA MAIZA GUSNAINI", kelas: "12-E"},
+{username: "13446", password: "12345", name: "RAFAEL HAIDAR RONALDO", kelas: "12-E"},
+{username: "13409", password: "12345", name: "RIDHO GATA WIJAYA", kelas: "12-E"},
+{username: "13377", password: "12345", name: "ROMIZ KHALDUN WIDYANTO", kelas: "12-E"},
+{username: "13412", password: "12345", name: "SAFIRA MUMTAZ APSARINI", kelas: "12-E"},
+{username: "13414", password: "12345", name: "SHAVIN ADINDRANI PUTRI", kelas: "12-E"},
+{username: "13487", password: "12345", name: "SYAFIRA", kelas: "12-E"},
+{username: "13450", password: "12345", name: "SYARIFUDDIN MUHAMMAD EL GHIFARY", kelas: "12-E"},
+{username: "13378", password: "12345", name: "TERESA AVILA KRISTIANA WIDIASTUTI", kelas: "12-E"},
+{username: "13520", password: "12345", name: "VARYSKA ADYATMA WARASTRI", kelas: "12-E"},
+{username: "13456", password: "12345", name: "ALEXANDER SONY KURNIAWAN", kelas: "12-F"},
+{username: "13563", password: "12345", name: "ALIFA ANINDITA RAHMADANI", kelas: "12-F"},
+{username: "13384", password: "12345", name: "ANANDITO WAHYU WICAKSONO", kelas: "12-F"},
+{username: "13530", password: "12345", name: "AZWA RIFNAND EFENDI", kelas: "12-F"},
+{username: "13353", password: "12345", name: "DWI FEBRIYANI", kelas: "12-F"},
+{username: "13535", password: "12345", name: "DZAFIF NAUFAL ISNUARTA", kelas: "12-F"},
+{username: "13536", password: "12345", name: "EMMANUELLA CHRISTANIA PUTRI", kelas: "12-F"},
+{username: "13537", password: "12345", name: "FADJRINA SALSABILA KHALISHAH PUTRI", kelas: "12-F"},
+{username: "13432", password: "12345", name: "FIRJAL FARAHNISA BELGIN", kelas: "12-F"},
+{username: "13465", password: "12345", name: "GRACELLA LOLITA PRASETYA PUTRI", kelas: "12-F"},
+{username: "13358", password: "12345", name: "GWEN ELENA MAKAYLA", kelas: "12-F"},
+{username: "13466", password: "12345", name: "HALIMAH LU'LU'UNNURANI", kelas: "12-F"},
+{username: "13541", password: "12345", name: "HIMAWAN ARIA YUDA", kelas: "12-F"},
+{username: "13435", password: "12345", name: "IRMAWATI DWI VALENTIN", kelas: "12-F"},
+{username: "13543", password: "12345", name: "KEYLA DWI OCTAVIA", kelas: "12-F"},
+{username: "13470", password: "12345", name: "KINANTI NURINTYAS", kelas: "12-F"},
+{username: "13581", password: "12345", name: "LUTFI FARHANA", kelas: "12-F"},
+{username: "13582", password: "12345", name: "MUTIA KIREINA RAHARJO", kelas: "12-F"},
+{username: "13583", password: "12345", name: "NABILA AULIA RAHMA", kelas: "12-F"},
+{username: "13507", password: "12345", name: "NABILA QURATA AULIA PUTRI R", kelas: "12-F"},
+{username: "13548", password: "12345", name: "NAYUNDA RASTYSIA YUSAPUTRI", kelas: "12-F"},
+{username: "13551", password: "12345", name: "NOVARA AKHMALIA NAFIATUN", kelas: "12-F"},
+{username: "13371", password: "12345", name: "NUR LAILA SYAHIDAH", kelas: "12-F"},
+{username: "13445", password: "12345", name: "OLIVIA FEBRIANI", kelas: "12-F"},
+{username: "13478", password: "12345", name: "PHILIP RUSDIYONO", kelas: "12-F"},
+{username: "13480", password: "12345", name: "RADIT RAFI'I", kelas: "12-F"},
+{username: "13373", password: "12345", name: "RAFAEL KRISTANTO", kelas: "12-F"},
+{username: "13374", password: "12345", name: "RAHMA SYAKIRAH", kelas: "12-F"},
+{username: "13448", password: "12345", name: "RISKA LILI PUTRI UTAMI", kelas: "12-F"},
+{username: "13589", password: "12345", name: "SABRINA ANGGANI RARAS", kelas: "12-F"},
+{username: "13514", password: "12345", name: "SALWA AL HAYA", kelas: "12-F"},
+{username: "13556", password: "12345", name: "SEVERINA LAKSITA WIDYA NASTITI", kelas: "12-F"},
+{username: "13593", password: "12345", name: "SHOFI AMALIA", kelas: "12-F"},
+{username: "13517", password: "12345", name: "SYAHIDA SALAMAH", kelas: "12-F"},
+{username: "13523", password: "12345", name: "ZAHWA DEVI RAIHANAH", kelas: "12-F"},
+{username: "13558", password: "12345", name: "ZETHA AURELIA", kelas: "12-F"},
+            { username: 'admin', password: 'admin', name: 'Panitia Pemilos', kelas: 'Admin', role: 'admin' }
+        ];
+
+        // =======================================================
+        // DATA KANDIDAT (Array of Objects)
+        // Ubah nama, visi, dan foto sesuai kandidat nyata.
+        // =======================================================
+        const CANDIDATES = [
+            {
+                id: 1,
+                name: 'Tiara Andini',
+                photo: 'calon1.jpg',
+                visi: 'Mewujudkan OSIS yang aktif, inovatif, dan berkarakter demi sekolah yang lebih baik.',
+                misi: 'Meningkatkan program ekstrakurikuler dan prestasi akademik',
+                color: 'from-orange-400 to-orange-600'
+            },
+            {
+                id: 2,
+                name: 'Bagas Prakoso',
+                photo: 'calon2.jpg',
+                visi: 'Menjadikan lingkungan sekolah bersih, asri, suportif, dan penuh kebersamaan.',
+                misi: 'Program go-green dan peningkatan fasilitas sekolah',
+                color: 'from-amber-400 to-amber-600'
+            },
+            {
+                id: 3,
+                name: 'Citra Lestari',
+                photo: 'calon3.jpg',
+                visi: 'Membangun kreativitas siswa melalui program ekstrakurikuler unggulan berkelas.',
+                misi: 'Mendorong seni, budaya, dan teknologi di lingkungan sekolah',
+                color: 'from-red-400 to-orange-500'
+            }
+        ];
+
+        // =======================================================
+        // KONFIGURASI GOOGLE APPS SCRIPT
+        // Ganti URL di bawah dengan URL deployment Anda sendiri
+        // =======================================================
+        const GOOGLE_SCRIPT_URL = 'URL_WEB_APP_ANDA_DISINI';
+
+        // =======================================================
+        // VARIABEL GLOBAL
+        // =======================================================
+        let currentUser = null;
+
+        // =======================================================
+        // DOM ELEMENTS
+        // =======================================================
+        const viewLogin  = document.getElementById('view-login');
+        const viewVoting = document.getElementById('view-voting');
+        const viewAdmin  = document.getElementById('view-admin');
+        const loginForm  = document.getElementById('login-form');
+        const loginError = document.getElementById('login-error');
+        const loginErrorText = document.getElementById('login-error-text');
+        const timeWarning    = document.getElementById('time-warning');
+        const loginHeader    = document.getElementById('login-header');
+        const loginSubtitle  = document.getElementById('login-subtitle');
+
+        // =======================================================
+        // JAM DIGITAL REAL-TIME
+        // Konsep: setInterval() menjalankan fungsi setiap 1 detik.
+        // =======================================================
+        function updateClock() {
+            const now = new Date();
+
+            // Format jam digital (HH:MM:SS)
+            document.getElementById('clock-time').textContent =
+                now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+            // Format tanggal lengkap Indonesia
+            document.getElementById('clock-date').textContent =
+                now.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+            // Cek apakah waktu voting terbuka (08:00 - 14:00)
+            const hour = now.getHours();
+            const isVotingOpen = hour >= 8 && hour < 14;
+
+            // Ubah tampilan header login berdasarkan waktu
+            if (!isVotingOpen) {
+                loginHeader.classList.remove('login-hero');
+                loginHeader.style.background = 'linear-gradient(135deg, #7f1d1d, #dc2626)';
+                loginSubtitle.textContent = '⛔ Sesi Pemilihan Sedang Ditutup';
+                timeWarning.classList.remove('hidden');
+            } else {
+                loginHeader.classList.add('login-hero');
+                loginHeader.style.background = '';
+                loginSubtitle.textContent = 'Masuk untuk memberikan suara Anda';
+                timeWarning.classList.add('hidden');
+            }
+
+            return isVotingOpen;
+        }
+
+        // Jalankan jam setiap 1000ms (1 detik)
+        setInterval(updateClock, 1000);
+        updateClock(); // Panggil langsung pertama kali
+
+        // =======================================================
+        // RENDER KARTU KANDIDAT
+        // Konsep: forEach() iterasi array, createElement() & innerHTML
+        // =======================================================
+        function renderCandidates() {
+            const container = document.getElementById('candidates-container');
+            container.innerHTML = '';
+
+            CANDIDATES.forEach((kandidat, index) => {
+                const card = document.createElement('div');
+                card.className = 'candidate-card flex flex-col';
+                card.style.animationDelay = `${index * 0.15}s`;
+
+                card.innerHTML = `
+                    <div class="photo-placeholder relative">
+                        <div class="candidate-number">${kandidat.id}</div>
+
+                        <!-- Foto kandidat (jika file tersedia) -->
+                        <img src="${kandidat.photo}" alt="Foto ${kandidat.name}"
+                             class="w-full h-full object-cover object-top absolute inset-0"
+                             onerror="this.style.display='none'">
+
+                        <!-- Placeholder jika foto tidak ada -->
+                        <div class="z-10 flex flex-col items-center justify-center gap-2 relative">
+                            <div class="w-24 h-24 bg-gradient-to-br ${kandidat.color} rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fa-solid fa-user text-white text-4xl"></i>
+                            </div>
+                            <span class="text-orange-400 text-xs font-medium">Foto Kandidat ${kandidat.id}</span>
+                        </div>
+
+                        <!-- Overlay saat hover -->
+                        <div class="hover-overlay">
+                            <div class="text-white text-center px-4">
+                                <i class="fa-solid fa-check-to-slot text-4xl mb-2 block"></i>
+                                <span class="font-bold text-lg">KLIK UNTUK MEMILIH</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 flex flex-col flex-grow text-center">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">${kandidat.name}</h3>
+                        <div class="w-12 h-1 bg-gradient-to-r from-orange-400 to-orange-600 mx-auto rounded-full mb-3"></div>
+                        <p class="text-gray-500 text-sm flex-grow italic leading-relaxed mb-4">
+                            &ldquo;${kandidat.visi}&rdquo;
+                        </p>
+                        <button onclick="handleVote(${kandidat.id})" class="btn-vote font-bold text-sm">
+                            <i class="fa-solid fa-check-to-slot mr-2"></i>PILIH KANDIDAT ${kandidat.id}
+                        </button>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+        renderCandidates();
+
+        // =======================================================
+        // RENDER TABEL ADMIN & STATISTIK
+        // Konsep: localStorage.getItem(), JSON.parse(), forEach()
+        // =======================================================
+        function loadAdminData() {
+            // Ambil data dari localStorage
+            const voteData = JSON.parse(localStorage.getItem('pemilos_votes') || '[]');
+            const tbody    = document.getElementById('admin-table-body');
+            document.getElementById('total-votes').textContent = voteData.length;
+
+            // Hitung suara per kandidat
+            const tally = {};
+            CANDIDATES.forEach(c => { tally[c.name] = 0; });
+            voteData.forEach(v => { if (tally[v.kandidat] !== undefined) tally[v.kandidat]++; });
+
+            // Render statistik per kandidat
+            const statsEl = document.getElementById('candidate-stats');
+            statsEl.innerHTML = '';
+            CANDIDATES.forEach((c, i) => {
+                const pct = voteData.length > 0 ? Math.round((tally[c.name] / voteData.length) * 100) : 0;
+                const div = document.createElement('div');
+                div.className = 'bg-orange-50 border border-orange-100 rounded-xl p-4';
+                div.innerHTML = `
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-bold text-gray-700 text-sm">${c.name}</span>
+                        <span class="text-orange-700 font-black text-lg">${tally[c.name]}</span>
+                    </div>
+                    <div class="w-full bg-orange-100 rounded-full h-2.5 overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-orange-500 to-orange-400 rounded-full transition-all duration-700" 
+                             style="width: ${pct}%"></div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1 text-right">${pct}% dari total</p>
+                `;
+                statsEl.appendChild(div);
+            });
+
+            // Render tabel detail
+            tbody.innerHTML = '';
+            if (voteData.length === 0) {
+                tbody.innerHTML = `
+                    <tr><td colspan="5" class="p-10 text-center text-gray-400">
+                        <i class="fa-solid fa-inbox text-3xl mb-2 block text-orange-200"></i>
+                        Belum ada data pemilihan yang masuk.
+                    </td></tr>`;
+                return;
+            }
+
+            // Tampilkan data terbaru di atas (reverse)
+            [...voteData].reverse().forEach((vote, i) => {
+                const tr = document.createElement('tr');
+                tr.className = 'table-row border-b border-orange-50 transition-colors';
+                tr.innerHTML = `
+                    <td class="p-3 text-sm text-gray-400 font-medium">${voteData.length - i}</td>
+                    <td class="p-3 text-sm text-gray-600 font-mono">${vote.waktu}</td>
+                    <td class="p-3 font-semibold text-gray-800">${vote.nama}</td>
+                    <td class="p-3 text-sm">
+                        <span class="bg-orange-100 text-orange-700 px-2.5 py-1 rounded-full text-xs font-bold">${vote.kelas}</span>
+                    </td>
+                    <td class="p-3 font-bold text-orange-700">
+                        <i class="fa-solid fa-check-circle mr-1 text-green-500"></i>${vote.kandidat}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // =======================================================
+        // FUNGSI TAMPILKAN ERROR
+        // =======================================================
+        function showError(msg) {
+            loginErrorText.textContent = msg;
+            loginError.classList.remove('hidden');
+            // Auto sembunyikan setelah 5 detik
+            setTimeout(() => loginError.classList.add('hidden'), 5000);
+        }
+
+        // =======================================================
+        // EVENT HANDLER: FORM LOGIN
+        // Konsep: addEventListener, Array.find(), validasi kondisional
+        // =======================================================
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Mencegah refresh halaman
+            loginError.classList.add('hidden');
+
+            const usernameInput = document.getElementById('username').value.trim();
+            const passwordInput = document.getElementById('password').value;
+
+            // Cari user yang cocok di array MOCK_USERS
+            const user = MOCK_USERS.find(u => u.username === usernameInput && u.password === passwordInput);
+
+            if (user) {
+                // --- Akses Admin (tanpa cek waktu) ---
+                if (user.role === 'admin') {
+                    currentUser = user;
+                    viewLogin.classList.add('hidden');
+                    viewAdmin.classList.remove('hidden');
+                    loadAdminData();
+                    loginForm.reset();
+                    return;
+                }
+
+                // --- Cek Waktu Voting (08:00 - 14:00) ---
+                const isVotingOpen = updateClock();
+                if (!isVotingOpen) {
+                    showError('Akses Ditolak: Pemilihan hanya dibuka pada pukul 08:00 – 14:00 WIB.');
+                    return;
+                }
+
+                // --- Cek Apakah Sudah Memilih (localStorage) ---
+                const votedUsers = JSON.parse(localStorage.getItem('pemilos_voted_users') || '[]');
+                if (votedUsers.includes(user.username)) {
+                    showError('Akses Ditolak: Anda sudah menggunakan hak suara. Pemilihan hanya dibolehkan 1 kali.');
+                    return;
+                }
+
+                // --- Login Berhasil! ---
+                currentUser = user;
+                loginForm.reset();
+
+                // Isi info pemilih di halaman voting & modal
+                document.getElementById('modal-voter-name').textContent  = currentUser.name;
+                document.getElementById('modal-voter-class').textContent = currentUser.kelas;
+                document.getElementById('voter-name').textContent  = currentUser.name;
+                document.getElementById('voter-class').textContent = currentUser.kelas;
+
+                // Tampilkan Modal Login Sukses
+                const modalLogin = document.getElementById('modal-login');
+                const loginPB    = document.getElementById('login-progress-bar');
+                modalLogin.classList.remove('hidden');
+                loginPB.classList.remove('progress-bar-anim');
+                void loginPB.offsetWidth; // reflow untuk restart animasi
+                loginPB.classList.add('progress-bar-anim');
+
+                // Otomatis pindah ke halaman voting setelah 3 detik
+                setTimeout(() => {
+                    modalLogin.classList.add('hidden');
+                    viewLogin.classList.add('hidden');
+                    viewVoting.classList.remove('hidden');
+                }, 3000);
+
+            } else {
+                showError('Username atau password salah! Pastikan Anda memasukkan NIS dengan benar.');
+            }
+        });
+
+        // =======================================================
+        // FUNGSI MEMILIH KANDIDAT
+        // Konsep: fetch() API (POST ke Google Apps Script), localStorage.setItem()
+        // =======================================================
+        function handleVote(candidateId) {
+            if (!currentUser) return;
+
+            // Konfirmasi sebelum memilih
+            const candidate = CANDIDATES.find(c => c.id === candidateId);
+            if (!confirm(`Anda akan memilih: ${candidate.name}\n\nApakah Anda yakin? Pilihan tidak dapat diubah!`)) return;
+
+            const now = new Date();
+            const newVote = {
+                waktu    : now.toLocaleString('id-ID'),   // Waktu lengkap
+                nama     : currentUser.name,
+                kelas    : currentUser.kelas,
+                kandidat : candidate.name
+            };
+
+            // 1. Kirim data ke Google Apps Script (fetch POST)
+            if (GOOGLE_SCRIPT_URL !== 'URL_WEB_APP_ANDA_DISINI') {
+                fetch(GOOGLE_SCRIPT_URL, {
+                    method  : 'POST',
+                    mode    : 'no-cors',
+                    headers : { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body    : JSON.stringify(newVote)
+                }).catch(err => console.error('Gagal kirim ke spreadsheet:', err));
+            }
+
+            // 2. Simpan rekap suara ke localStorage
+            const existingVotes = JSON.parse(localStorage.getItem('pemilos_votes') || '[]');
+            localStorage.setItem('pemilos_votes', JSON.stringify([...existingVotes, newVote]));
+
+            // 3. Catat username sebagai sudah memilih
+            const votedUsers = JSON.parse(localStorage.getItem('pemilos_voted_users') || '[]');
+            localStorage.setItem('pemilos_voted_users', JSON.stringify([...votedUsers, currentUser.username]));
+
+            // 4. Tampilkan Modal Sukses Memilih + Progress Bar
+            document.getElementById('modal-chosen-candidate').textContent = candidate.name;
+            const modalVote  = document.getElementById('modal-vote');
+            const progressBar = document.getElementById('progress-bar');
+            modalVote.classList.remove('hidden');
+            progressBar.classList.remove('progress-bar-anim');
+            void progressBar.offsetWidth;
+            progressBar.classList.add('progress-bar-anim');
+
+            // 5. Auto logout & kembali ke awal setelah 3 detik
+            setTimeout(() => {
+                modalVote.classList.add('hidden');
+                handleLogout();
+            }, 3000);
+        }
+
+        // =======================================================
+        // FUNGSI LOGOUT
+        // =======================================================
+        function handleLogout() {
+            currentUser = null;
+            viewVoting.classList.add('hidden');
+            viewAdmin.classList.add('hidden');
+            viewLogin.classList.remove('hidden');
+        }
+
+        // =======================================================
+        // FUNGSI RESET DATA (Admin only)
+        // Konsep: localStorage.removeItem()
+        // =======================================================
+        function resetData() {
+            if (confirm('⚠️ PERHATIAN!\n\nAnda akan menghapus SEMUA data pemilihan dari perangkat ini.\nAksi ini tidak dapat dibatalkan.\n\nLanjutkan?')) {
+                localStorage.removeItem('pemilos_votes');
+                localStorage.removeItem('pemilos_voted_users');
+                loadAdminData();
+                alert('✅ Data berhasil direset. Semua rekap pemilihan telah dihapus.');
+            }
+        }
+
+        // =======================================================
+        // FUNGSI EXPORT CSV (Bonus Fitur)
+        // Konsep: Blob, URL.createObjectURL(), link download
+        // =======================================================
+        function exportCSV() {
+            const voteData = JSON.parse(localStorage.getItem('pemilos_votes') || '[]');
+            if (voteData.length === 0) {
+                alert('Belum ada data untuk diekspor.');
+                return;
+            }
+
+            // Buat isi CSV
+            const header = 'No,Waktu,Nama Pemilih,Kelas,Kandidat Dipilih\n';
+            const rows   = voteData.map((v, i) =>
+                `${i+1},"${v.waktu}","${v.nama}","${v.kelas}","${v.kandidat}"`
+            ).join('\n');
+
+            const csvContent = '\uFEFF' + header + rows; // BOM untuk Excel Indonesia
+            const blob  = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url   = URL.createObjectURL(blob);
+            const link  = document.createElement('a');
+            link.href     = url;
+            link.download = `Rekap_Pemilos_SMAN1_Sleman_2026_${new Date().toLocaleDateString('id-ID').replace(/\//g, '-')}.csv`;
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
